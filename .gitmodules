@@ -1,0 +1,3 @@
+[submodule "face-embeddings-generator"]
+	path = face-embeddings-generator
+	url = https://github.com/ksachdeva/face-embeddings-generator

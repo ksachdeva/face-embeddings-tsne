@@ -31,13 +31,13 @@ export class GraphComponent implements OnInit, OnChanges {
     const margin: any = {top: 20, right: 15, bottom: 60, left: 60};
 
     const element = this.chartContainer.nativeElement;
-    const width = 800 - margin.left - margin.right;
-    const height = 800 - margin.top - margin.bottom;
+    const width = element.offsetWidth - margin.left - margin.right;
+    const height = element.offsetHeight - margin.top - margin.bottom;
 
     const x = d3.scaleLinear().domain([0, 1]).range([0, width]);
     const y = d3.scaleLinear().domain([0, 1]).range([height, 0]);
 
-    const chart = d3.select('body')
+    const chart = d3.select(element)
                       .append('svg')
                       .attr('width', width + margin.right + margin.left)
                       .attr('height', height + margin.top + margin.bottom)

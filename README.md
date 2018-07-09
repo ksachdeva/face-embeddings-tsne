@@ -4,6 +4,8 @@
 
 This is a very simple web page (WIP) that uses the [tfjs-tsne](https://github.com/tensorflow/tfjs-tsne) library to visualize the face embeddings generated using [dlib](https://github.com/davisking/dlib).
 
+See the demo at [https://ksachdeva.github.io/face-embeddings-tsne/](https://ksachdeva.github.io/face-embeddings-tsne/). Make sure to open the javascript console as well to see some debug information. On my macbook pro 2015, if I set perplexity more than 18 I get an error. On a Ubuntu machine with NVIDIA 1080 I am able to set the max perplexity (30) with out any error.
+
 ## Setup / Install / Run instructions
 
 A sample file containing the embeddings [dlib.json](embeddings/dlib.json) is already included in this repository. If you want to generate a sample that contains more classes then you can use [face-embeddings-generator](https://github.com/ksachdeva/face-embeddings-generator) project.

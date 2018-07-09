@@ -10,6 +10,7 @@ import * as d3 from 'd3';
 export class GraphComponent implements OnInit, OnChanges {
   @ViewChild('tsne') private chartContainer: ElementRef;
   @Input() private data: Array<any>;
+  @Input() private labels: Array<any>;
 
   private chart: any;
 
@@ -65,15 +66,21 @@ export class GraphComponent implements OnInit, OnChanges {
 
     const dots = main.append('g');
 
+    // wrap the data
+    const coor = [];
+    for (let d = 0; d < this.data.length; d++) {
+      coor.push({data: this.data[d], label: this.labels[d]});
+    }
+
     dots.selectAll('scatter-dots')
-        .data(this.data)
+        .data(coor)
         .enter()
         .append('svg:circle')
-        .attr('cx', (d) => x(d[0]))
-        .attr('cy', (d) => y(d[1]))
+        .attr('cx', (c) => x(c.data[0]))
+        .attr('cy', (c) => y(c.data[1]))
         .attr('stroke-width', 0.25)
         .attr('stroke', '#1f77b4')
-        .attr('fill', 'none')
+        .attr('fill', (c) => c.label)
         .attr('r', 5);
   }
 }

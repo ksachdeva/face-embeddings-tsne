@@ -31,6 +31,6 @@
 
     <div [hidden]="!isGenerating">Please wait ...</div>
 
-    <app-graph *ngIf="graphData" [data]="graphData"></app-graph>
+    <app-graph *ngIf="graphData" [data]="graphData" [labels]="labels"></app-graph>
   </mat-card-content>
 </mat-card>

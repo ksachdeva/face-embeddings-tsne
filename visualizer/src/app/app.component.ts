@@ -11,6 +11,7 @@ import {TSNEService} from './services/tsne.service';
 
 export class AppComponent implements OnInit {
   graphData: Array<any>;
+  labels: Array<any>;
 
   @Input() isGenerating: boolean;
   tsneIterations = 1000;
@@ -26,7 +27,8 @@ export class AppComponent implements OnInit {
   async generateData() {
     this.isGenerating = true;
     this.graphData = undefined;
-    this.graphData = await this.tsneService.computeCoordinates(
+    this.labels = undefined;
+    [this.graphData, this.labels] = await this.tsneService.computeCoordinates(
         this.perplexity, this.knnIterations, this.tsneIterations);
     this.isGenerating = false;
   }

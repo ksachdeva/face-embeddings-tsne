@@ -13,11 +13,27 @@ export class TSNEService {
     const ds: DatasetEntry[] =
         await this.datasetService.getEmbeddings().toPromise();
 
-    // convert it into the tensors
+    // convert data into the tensors
     const embeddings = ds.map(d => d.embeddings);
     const flat = [].concat(...embeddings);
 
     const tensor = tf.tensor2d(flat);
+
+    const fillColor = () => {
+      // tslint:disable-next-line:no-bitwise
+      return '#' + ((1 << 24) * (Math.random() + 1) | 0).toString(16).substr(1);
+    };
+
+    // assign color for each label
+    const labels = [];
+    let labelIdx = fillColor();
+    ds.forEach(element => {
+      for (let i = 0; i < element.embeddings.length; i++) {
+        labels.push(labelIdx);
+      }
+      labelIdx = fillColor();
+    });
+
 
     const embedder = tsne.tsne(tensor, {
       perplexity: perplexity,
@@ -27,6 +43,8 @@ export class TSNEService {
 
     await embedder.compute(tsneIterations);
 
-    return await embedder.coordsArray();
+    const coordinates = await embedder.coordsArray();
+
+    return [coordinates, labels];
   }
 }

@@ -10,12 +10,12 @@ import {TSNEService} from './services/tsne.service';
 })
 
 export class AppComponent implements OnInit {
-  private graphData: Array<any>;
+  graphData: Array<any>;
 
-  @Input() private isGenerating: boolean;
-  private tsneIterations = 1000;
-  private knnIterations = 800;
-  private perplexity = 18;
+  @Input() isGenerating: boolean;
+  tsneIterations = 1000;
+  knnIterations = 800;
+  perplexity = 18;
 
   constructor(private tsneService: TSNEService) {
     this.isGenerating = false;

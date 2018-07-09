@@ -8,7 +8,8 @@ import {DatasetService} from './dataset.service';
 export class TSNEService {
   constructor(private datasetService: DatasetService) {}
 
-  async computeCoordinates() {
+  async computeCoordinates(
+      perplexity: number, knnIterations: number, tsneIterations: number) {
     const ds: DatasetEntry[] =
         await this.datasetService.getEmbeddings().toPromise();
 
@@ -19,12 +20,12 @@ export class TSNEService {
     const tensor = tf.tensor2d(flat);
 
     const embedder = tsne.tsne(tensor, {
-      perplexity: 18,
+      perplexity: perplexity,
       verbose: true,
       knnMode: 'auto',
     });
 
-    await embedder.compute(1000);
+    await embedder.compute(tsneIterations);
 
     return await embedder.coordsArray();
   }

@@ -25,6 +25,7 @@ export class AppComponent implements OnInit {
 
   async generateData() {
     this.isGenerating = true;
+    this.graphData = undefined;
     this.graphData = await this.tsneService.computeCoordinates(
         this.perplexity, this.knnIterations, this.tsneIterations);
     this.isGenerating = false;

@@ -10,7 +10,7 @@ A sample file containing the embeddings [dlib.json](embeddings/dlib.json) is alr
 
 This sample file contains 10 classes only.
 
-If you are generating the new sample file then make sure that your file is generated in the *embeddings* directory of this project as this is where the javascript (data.js) expects it to be.
+If you are generating the new sample file then make sure that your file is generated in the *visualizer/src/assets* directory of this project as this is where the javascript expects it to be.
 
 ```bash
 # if you want to get face-embeddings-generator as part of this project
@@ -19,6 +19,8 @@ git clone --recursive https://github.com/ksachdeva/face-embeddings-tsne
 ```
 
 ```bash
-yarn
-yarn watch
+# to run
+cd visualizer
+npm install
+ng serve
 ```

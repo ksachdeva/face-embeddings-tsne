@@ -5,9 +5,10 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "build-prod": "ng build --prod --base-href 'https://ksachdeva.github.io/face-embeddings-tsne/'",
+    "push-ghpages": "ngh -d dist/visualizer",
+    "deploy": "npm -s run-script build-prod && npm -s run-script push-ghpages"
   },
   "private": true,
   "dependencies": {

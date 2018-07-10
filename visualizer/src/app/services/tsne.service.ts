@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import * as tf from '@tensorflow/tfjs-core';
 import * as tsne from '@tensorflow/tfjs-tsne';
+import randomColor from 'randomcolor';
 import {DatasetService} from './dataset.service';
 
 @Injectable()
@@ -18,23 +19,16 @@ export class TSNEService {
 
     const tensor = tf.tensor2d(flat);
 
-    const fillColor = () => {
-      // tslint:disable-next-line:no-bitwise
-      return '#' + ((1 << 24) * (Math.random() + 1) | 0).toString(16).substr(1);
-    };
+    // generate colors equal to the number of entries
+    const colors =
+        randomColor({count: ds.length, luminosity: 'bright', hue: 'random'});
 
-    // assign color for each label
     const labels = [];
-    let labelIdx = fillColor();
-    ds.forEach(element => {
-      for (let i = 0; i < element.embeddings.length; i++) {
-        labels.push(labelIdx);
+    for (let i = 0; i < ds.length; i++) {
+      for (let j = 0; j < ds[i].embeddings.length; j++) {
+        labels.push(colors[i]);
       }
-      do {
-        labelIdx = fillColor();
-      } while (labels.indexOf(labelIdx) !== -1);
-    });
-
+    }
 
     const embedder = tsne.tsne(tensor, {
       perplexity: perplexity,

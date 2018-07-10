@@ -27,6 +27,7 @@
     "@tensorflow/tfjs-tsne": "^0.2.0",
     "core-js": "^2.5.4",
     "d3": "^5.5.0",
+    "randomcolor": "^0.5.3",
     "rxjs": "^6.0.0",
     "zone.js": "^0.8.26"
   },

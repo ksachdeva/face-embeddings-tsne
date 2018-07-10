@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import * as tf from '@tensorflow/tfjs-core';
 import * as tsne from '@tensorflow/tfjs-tsne';
-
 import {DatasetService} from './dataset.service';
 
 @Injectable()
@@ -31,7 +30,9 @@ export class TSNEService {
       for (let i = 0; i < element.embeddings.length; i++) {
         labels.push(labelIdx);
       }
-      labelIdx = fillColor();
+      do {
+        labelIdx = fillColor();
+      } while (labels.indexOf(labelIdx) !== -1);
     });
 
 
